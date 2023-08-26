@@ -1,0 +1,19 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+RUN echo "Hello from my new docker image!!"
+RUN sudo apt-get install python3-pip
+RUN sudo python3 -m pip install fastapi uvicorn
+RUN sudo apt-get update && sudo apt-get install -y nodejs npm
+#RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+#RUN chmod +x ~/.nvm/nvm.sh
+#RUN source ~/.bashrc
+#RUN nvm install 17
+
+EXPOSE 3000
+
+WORKDIR ~/workspaces/isaac_ros_dev/ros_ws/isaac_ros_common/
+COPY backend /workspaces/isaac_ros-dev/backend/
+COPY frontend /workspaces/isaac_ros-dev/frontend/
+RUN cd /workspaces/isaac_ros-dev/
+
